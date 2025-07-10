@@ -8,15 +8,15 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
         <motion.h1
-          className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text tracking-widest"
+          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text tracking-widest"
           whileHover={{ scale: 1.1 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
           VP
         </motion.h1>
-        <ul className="hidden md:flex gap-6 text-sm text-green-300">
+        <ul className="hidden md:flex gap-4 sm:gap-6 text-sm sm:text-base text-green-300">
           {['Home', 'About', 'Projects', 'Experience', 'Skills', 'Contact'].map(section => (
             <motion.li
               key={section}
@@ -33,3 +33,4 @@ export default function Navbar() {
     </motion.nav>
   )
 }
+

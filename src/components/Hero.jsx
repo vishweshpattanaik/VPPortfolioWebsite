@@ -1,44 +1,31 @@
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
 export default function Hero() {
+  const ref = useRef()
+  const inView = useInView(ref, { once: true })
+
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 text-center bg-[#0d0d0d]">
-      <motion.h1
-        className="text-5xl sm:text-6xl font-bold mb-4 text-white"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Vishwesh <span className="bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text">Pattanaik</span>
-      </motion.h1>
-
-      <motion.p
-        className="text-gray-400 max-w-2xl text-lg mb-6"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
-        Electrical & Computer Engineering student. Passionate about embedded systems, AI/ML, and building impactful tech.
-      </motion.p>
-
-      <motion.a
+    <motion.section
+      id="hero"
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-8 text-center max-w-4xl mx-auto"
+    >
+      <h1 className="text-4xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 mb-4">
+        Vishwesh Pattanaik
+      </h1>
+      <p className="text-gray-300 text-base sm:text-lg mb-6">
+        Electrical & Computer Engineering Student | Passionate about Embedded Systems, AI, and Data-Driven Design
+      </p>
+      <a
         href="#projects"
-        className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-3 rounded-full hover:scale-105 transition-transform"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: 'spring', stiffness: 300 }}
+        className="mt-4 inline-block px-6 py-3 text-sm sm:text-base rounded-lg bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-300"
       >
         View My Work
-      </motion.a>
-
-      <motion.div
-        className="mt-10 text-green-400 animate-bounce"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        ↓
-      </motion.div>
-    </section>
+      </a>
+    </motion.section>
   )
 }

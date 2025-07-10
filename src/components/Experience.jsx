@@ -1,4 +1,10 @@
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
+
 export default function Experience() {
+  const ref = useRef()
+  const inView = useInView(ref, { once: true })
+
   const entries = [
     {
       title: "Electrical & Instrumentation Intern",
@@ -13,22 +19,29 @@ export default function Experience() {
       ]
     },
     {
-      title: "Selected Participant",
-      org: "Huawei Seeds for the Future",
-      year: "2022–2023",
-      location: "International Program",
-      type: "Achievement",
+      title: "Digital Operations Intern",
+      org: "Aronco Services Ltd.",
+      year: "2022",
+      location: "Trinidad",
+      type: "Internship",
       achievements: [
-        "Selected for competitive international program",
-        "Recognition for technical excellence",
-        "Exposure to cutting-edge telecommunications tech"
+        "Worked with industrial automation systems and SCADA integration",
+        "Digitized legacy equipment documentation using cloud platforms",
+        "Assisted engineers with real-time diagnostics of industrial PLCs"
       ]
     }
   ]
 
   return (
-    <section id="experience" className="px-6 py-20 max-w-5xl mx-auto">
-      <h2 className="text-4xl font-bold mb-8 text-white">
+    <motion.section
+      id="experience"
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="px-4 sm:px-8 py-20 max-w-5xl mx-auto"
+    >
+      <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-white text-center">
         Professional <span className="text-blue-500">Experience</span>
       </h2>
       <div className="space-y-8">
@@ -36,7 +49,7 @@ export default function Experience() {
           <div key={idx} className="bg-[#111] p-6 rounded-xl border border-[#222]">
             <div className="flex justify-between items-center mb-2">
               <div>
-                <h3 className="text-white font-semibold">{exp.title}</h3>
+                <h3 className="text-white font-semibold text-lg">{exp.title}</h3>
                 <p className="text-blue-400 text-sm">{exp.org}</p>
               </div>
               <div className="text-right">
@@ -47,7 +60,7 @@ export default function Experience() {
             </div>
             <div>
               <h4 className="text-sm text-green-400 font-semibold mb-1">Key Achievements</h4>
-              <ul className="list-disc pl-5 text-gray-300 text-sm">
+              <ul className="list-disc pl-5 text-gray-300 text-sm space-y-1">
                 {exp.achievements.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
@@ -56,6 +69,6 @@ export default function Experience() {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }

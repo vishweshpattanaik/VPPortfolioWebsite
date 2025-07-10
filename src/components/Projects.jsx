@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
 const projects = [
   {
@@ -39,9 +40,19 @@ const projects = [
 ]
 
 export default function Projects() {
+  const ref = useRef()
+  const inView = useInView(ref, { once: true })
+
   return (
-    <section id="projects" className="px-6 py-20 max-w-7xl mx-auto">
-      <h2 className="text-4xl font-bold mb-4 text-white">
+    <motion.section
+      id="projects"
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="px-4 sm:px-8 py-20 max-w-6xl mx-auto"
+    >
+      <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
         Featured <span className="text-blue-500">Projects</span>
       </h2>
       <p className="text-gray-400 mb-8">
@@ -70,6 +81,6 @@ export default function Projects() {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }
